@@ -9,14 +9,14 @@
 
 int set_func(char **arg)
 {
+	size_t len = strlen(arg[1]) + strlen(arg[2]) + 2;
+	char *var = (char *)malloc(len);
+	int result = putenv(var);
+
 	if (getenv(arg[1]) != NULL && arg[3] == 0)
 	{
 		return (1);
 	}
-
-	size_t len = strlen(arg[1]) + strlen(arg[2]) + 2;
-
-	char *var = (char *)malloc(len);
 
 	if (var == NULL)
 	{
@@ -26,8 +26,6 @@ int set_func(char **arg)
 	strcpy(var, arg[1]);
 	strcat(var, "=");
 	strcat(var, arg[2]);
-
-	int result = putenv(var);
 
 	if (result != 0)
 	{
